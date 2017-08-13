@@ -20,7 +20,7 @@ import java.util.Set;
 public final class LocalBroadcastManager {
     public static final String TAG = "LocalBroadcastManager";
     private final Context mAppContext;
-    private final HashMap<BroadcastReceiver, ArrayList<IntentFilter>> mReceivers = new HashMap<BroadcastReceiver, ArrayList<IntentFilter>>();
+    private final HashMap<BroadcastReceiver, ArrayList<IntentFilter>> mReceivers = new HashMap<>();
     private final HashMap<String, ArrayList<LocalBroadcastManager.ReceiverRecord>> mActions = new HashMap<String, ArrayList<LocalBroadcastManager.ReceiverRecord>> ();
     private final ArrayList<LocalBroadcastManager.BroadcastRecord> mPendingBroadcasts = new ArrayList<LocalBroadcastManager.BroadcastRecord>();
     private final Handler mHandler;

@@ -24,24 +24,25 @@ public class DisneyPushReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         try {
             Bundle bundle = intent.getExtras();
-            Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+            Log.d(TAG, "[DisneyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
             if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
                 String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-                Log.d(TAG, "[MyReceiver] Registration Id : " + regId);
+                Log.d(TAG, "[DisneyReceiver] Registration Id : " + regId);
                 //send the Registration Id to your server...
 
             } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-                Log.d(TAG, "[MyReceiver] receives customized message: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
+                Log.d(TAG, "[DisneyReceiver] receives customized message: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
                 processCustomMessage(context, bundle);
 
             } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-                Log.d(TAG, "[MyReceiver] receives notification");
+                Log.d(TAG, "[DisneyReceiver] receives notification");
                 int notificationId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
-                Log.d(TAG, "[MyReceiver] notification ID: " + notificationId);
+                processCustomMessage(context, bundle);
+                Log.d(TAG, "[DisneyReceiver] notification ID: " + notificationId);
 
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-                Log.d(TAG, "[MyReceiver] open the notification");
+                Log.d(TAG, "[DisneyReceiver] open the notification");
 
                 Intent i = new Intent(context, TestActivity.class);
                 i.putExtras(bundle);
@@ -50,12 +51,12 @@ public class DisneyPushReceiver extends BroadcastReceiver {
                 context.startActivity(i);
 
             } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
-                Log.d(TAG, "[MyReceiver] receives RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
+                Log.d(TAG, "[DisneyReceiver] receives RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
                 boolean connected = intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false);
-                Log.w(TAG, "[MyReceiver]" + intent.getAction() + " connected state change to " + connected);
+                Log.w(TAG, "[DisneyReceiver]" + intent.getAction() + " connected state change to " + connected);
             } else {
-                Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
+                Log.d(TAG, "[DisneyReceiver] Unhandled intent - " + intent.getAction());
             }
         } catch (Exception e) {
 
