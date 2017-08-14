@@ -10,11 +10,32 @@ apply plugin: 'com.android.application'
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
+    compile 'cn.jiguang.sdk:jpush:3.0.8'
+    compile 'cn.jiguang.sdk:jcore:1.1.6'
 }
 
 android {
     compileSdkVersion 21
     buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        applicationId "com.disney.push"
+        minSdkVersion 21
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+        resConfigs "en", "zh-rCN"
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a','x86', 'x86_64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : "com.disney.push",
+                JPUSH_APPKEY : "4957fea578677174dd6d334b",
+                JPUSH_CHANNEL : "developer-default",
+        ]
+    }
 
     sourceSets {
         main {

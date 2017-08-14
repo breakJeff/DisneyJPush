@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.disney.push"
-          android:versionCode="308"
-          android:versionName="3.0.8">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.disney.push"
+    android:versionCode="308"
+    android:versionName="3.0.8">
     <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="21"/>
 
     <!-- Required -->
@@ -85,6 +86,7 @@
         <service
             android:name="cn.jpush.android.service.PushService"
             android:exported="false"
+            tools:replace="android:process"
             android:process=":mult">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER"/>
@@ -154,9 +156,5 @@
                 <category android:name="com.disney.push"></category>
             </intent-filter>
         </receiver>
-        <!-- Required  . Enable it you can get statistics data with channel -->
-        <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="4957fea578677174dd6d334b"/>
-
     </application>
 </manifest>
